@@ -1,0 +1,91 @@
+数据类型总结与debug调试
+
+一.字典的其他方法
+1.keys()：获取字典的所有的键
+dic = {'name':'cathy','age':33,'sex':'女‘}
+res1 = dic.keys()
+print(list[res1])
+2.values()：获取字典中所有的值
+res2 = dic.values()
+print(list[res2])
+3.items() ：获取字典中的键值对，每个键值对会转换成元组
+res3 = dic.items()
+print(list(res3)
+4.update()：往字典中添加多个键值对
+dic.update({'a':11,'b':22,'c':33})
+print(dic)
+二.集合 (set类型):用{}来表示
+1.空集合 
+set2 = set()
+print(type(set2))
+注意：字典花括号中是键值对的形式，集合和列表一样，只有值
+dic = {} 这个是空字典
+2.集合添加元素 :add
+set2 = {11,22,33}
+set2.add(999)
+3.集合删除元素:remove
+set2.remove(11)
+print(set2)
+4.集合的特性
+a.集合中的元素是无序的
+b.集合中只能存在不可变类型的数据
+c.集合中的元素不能重复（和数学中集合是一样的）
+
+需求：如何快速去除列表中重复的元素
+列表--》集合--》列表
+li = [11,22,22,11,33,44,33,55]
+res = set(li)
+print(list(res))
+三.基本的数据类型
+数值: int float bool
+序列: list 字符串 tuple dic 
+可变(具备增删改查的方法):列表 字典 集合
+不可变:数值 字符串 元组
+如何测试数据:set = {111,'111',(11,22),{11.22}}
+加入列表跟字典数据，则报错
+四.运算符
+1.逻辑运算符:与and: 真真为真
+            或or:  假假为假
+            非not: 非真为假
+2.成员运算符:in 
+用法：students = ["cathy","Eason","lily"]
+name = "流年“           
+print(name in students)
+not in 用法：
+name = "张三“ 
+print(name not in students)
+字典作成员运算符:
+判断键在字典里面:print("name" in dic.keys())
+判断值在字典里面:print（18 in dic.values())
+错误示范：
+print（ d in dic )
+3.身份运算符: is：是去比较数据的id,也就是比较内存地址
+            is not 
+id是python的内置函数，
+
+五.控制流程
+一.
+a.顺序:代码从上往下执行
+b.分支:根据不同的条件，执行不同的代码
+c.循环:特定的代码重复执行
+d.python的代码块处理：
+1.python是通过缩进来区分代码块的
+2.缩进通常是一个Tab键（四个空格）
+二.条件语句  
+注意点：一个条件语句中只有（必须）一个if,else可有可无，elif(0个或者n个)，只要有一个条件成立，其他判断条件都不会执行
+if 
+if else
+if elif  else
+if 条件:
+    #条件成立执行语句
+elif 条件:
+    #条件成立执行语句        
+else:
+    #条件成立执行语句
+
+断点Debug-->step into
+
+
+
+
+

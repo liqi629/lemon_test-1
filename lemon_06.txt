@@ -1,0 +1,124 @@
+一.while 条件循环
+语法：
+while 条件：
+    循环体
+break:强制跳出循环体
+contiune:终止当前循环，开启下一轮循环（执行到continue，直接回到条件判断的地方）
+pass:没有任何的语义，执行到pass直接通过，通常用来占位
+#例子1:
+while True:
+    name = input("请输入账号：”)
+    password = input("请输入密码：”)
+    while name == 'cathy" and password =='cathy':
+        print("正确")
+        break 
+
+
+二.for 循环遍历，可以遍历任何可迭代的对象，比如字符串，列表，元组，字典，集合
+语法：
+for i(临时变量) in 被遍历的数据：
+    循环执行的代码
+内置函数：len(),获取数据的长度
+例子1:遍历列表
+li =[11,22,33,44,55,66]
+print("获取数据的长度:“,len(li))
+for i in li:
+    print(i)
+例子2:遍历字符串
+s ="abcdef"
+for i in s:
+    print(i)
+例子3:遍历元组
+tup = (11,22,33)
+for i in tup:
+    print(i)
+例子4:遍历集合
+set1 = {11,22,33,44,55}
+for i in set1:
+    print(i)
+例子5.遍历字典
+dic = {'name':'cathy','age':33,'sex':'女‘}
+#直接遍历字典，遍历出来的是字典的key和value
+for i in dic:
+    print(i)
+for i in dic.keys():
+    print(i)
+# 遍历字典的值
+for i in dic.values():
+    print(i)
+# 遍历字典的键值对,单独用变量
+for k,v in dic.items():
+    print(k，v)
+# 元组拆包(列表也可以拆，但通常不用)
+tu = ('aa',11,33)
+a,b,c = tu 
+print("a的值：",a)
+print("b的值：",b)
+print("c的值：",c)
+#例子5:批量处理成绩是否及格
+li = [65,76,89,90,43,56,78,80]
+for i in li:
+    if i >= 60:
+        print("及格")
+    else:
+        print("不及格”)
+#例子6:打印100遍“hello world"
+for i in range(100):
+    print("hello,world")
+
+
+# range():
+range(n):默认生成一个0到n-1的整数序列，对于这个整数序列，可以通过list()转换成列表类型的数据
+rangge(n,m):默认生成n到m-1的整数序列，对于这个整数序列，可以通过list()转换成列表类型的数据
+range(n,m,k):默认生成以步长为k,n到m-1的整数序列，对于这个整数序列，可以通过list()转换成列表类型的数据
+
+1.for循环中的break和contiue
+2.for -- else :
+for i in range(10):
+    循环体
+else:
+    for对应的else语句，for循环正常遍历结束的时候会执行
+    (如果是for通过break来结束循环则不会执行对应的else)
+
+# 例子7:
+for i in range(0,10):
+    if i == 6:
+        break
+    print(f"这是第{}遍)：hello word")
+print("for外面“)
+for i in range(0,10):
+    if i == 6:
+        contiune
+    print(f"这是第{}遍)：hello word")
+print("for外面”)
+# 需求: 实现一个注册的小程序的代码
+1. 用户输入账号uid,密码password,再次确认密码
+2. 判断账号是否已经注册，已注册打印账号被注册
+3. 判断两次密码是否一致
+4. 上面的两个判断都通过，则注册成功，需要将账号保存到列表中
+user =[
+    {"uid":"python","password":'123456'}
+    {"uid":"java","password":'654321'}
+    {"uid":"python","password":'1234'}
+    {"uid":"java","password":'6543'}
+    ]
+步骤:输入，条件判断，for循环，输出，列表的操作
+uid = input("请输入账号：”)
+password = input("请输入密码：”)
+pw2 = input("请再次输入密码：”)
+#遍历所有的账号
+for u in user:
+    if uid == u["uid"]:
+        print("此用户已经注册")
+        break
+else:
+    if password == pw2:
+        print("注册成功")
+        #把输入的账号和密码以字典的形式加入到user中
+        user.append({"uid":id,"password":pw2})
+    else:
+        print("两次输入的不一致")
+
+
+/v1/open/fission/skuGoods?
+pageNumber=1&pageSize=10&filters.1.name=sortName&filters.1.values.1=price&filters.1.operator=eq&filters.2.name=shopId&filters.2.values.1=10251430&filters.2.operator=eq

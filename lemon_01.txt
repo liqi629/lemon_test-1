@@ -1,0 +1,49 @@
+lemon_01day：
+
+pytho的注释
+单行注释 #
+注释快捷键 command+？
+window 上 ctrl+?
+多行注释：
+''' 三个引号开头
+‘’‘ 三个引号结尾
+1.python中的标点符号，要使用英文的 
+2.单引号 双引号是没有区别的，使用的效果是一样的
+
+
+Python的变量类型
+
+变量要先定义，才能使用,   注意：python 严格要求区分字母大小写
+1.命名规范
+a.变量只能使用数字，字母，或者下划线组成
+b.变量不能以数字开头
+c.不能使用python中的关键字 
+
+
+查看python中的关键字:
+import keyword
+print(keyword.kwlist)
+['False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for',  'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+
+2.命名风格：
+a.下划线命名法，单词与单词之间用下划线分割
+     age_max = 19
+
+b. 驼峰命名法
+   大驼峰：每个单词的第一个字母大写
+   小驼峰：第一个单词首字母小写，其他单词首字母大写
+
+标识符：
+ 在python 中只要是自己起的都是标识符
+标识符：变量，函数名，类名，模块名（py文件）,包名
+
+命名风格跟变量风格一样，命令规范也跟变量一样
+
+
+python中的输入和输出
+输入：input 
+输出：print
+
+pyhton的数据类型：
+数值类型：不加引号，就是数学中的数字
+字符类型：引号引起来的都是字符串
