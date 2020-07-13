@@ -120,5 +120,3 @@ else:
         print("两次输入的不一致")
 
 
-/v1/open/fission/skuGoods?
-pageNumber=1&pageSize=10&filters.1.name=sortName&filters.1.values.1=price&filters.1.operator=eq&filters.2.name=shopId&filters.2.values.1=10251430&filters.2.operator=eq
