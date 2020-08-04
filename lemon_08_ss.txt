@@ -1,0 +1,147 @@
+一.函数的返回值
+函数的返回值，通过关键字return来定义
+不写return或者return后面的数据为空的话，就返回None
+return后面只有一个值，返回的数据就是这个数据
+return后面超过两个的话，返回的数据就是一个元组
+注意点：函数执行到return就会结束函数的运行，并返回结果
+例子1:
+li = [11,22,33,44]
+res = li.append(55)  #为什么append调用之后，用变量接收不到结果（因为append这个方法没有返回值）
+res2 = li.copy()
+print(res)  -->None
+print(res2) -->[11,22,33,44]
+
+例子2:
+def add(a,b):
+    c = a + b 
+    d = a - b
+    return c,d 
+res1,res2 = add(11,33)
+
+例子3:
+def demo1(a,b):
+    c = a + b
+    d = a - b
+    print("***********")
+    return c,d
+    print("******2******")
+    print("******3******")
+demo1(22,77)
+
+二.函数的作用域
+全局变量：python中直接定义在模块（py文件中的变量），叫做全局变量,在该文件中任意位置都能使用
+问题一：定义的全局变量函数中可不可以使用：
+-->可以
+局部变量：定义在函数中的变量叫做局部变量，只能在该函数内部使用
+global在函数内部声明全局变量
+建议：定义局部变量的时候尽量不要跟全局变量重名
+例子4:
+a = 100   --->全局
+def demo2():
+    b = 100 --->局部
+    print("函数中打印输出：”，a)
+    print("函数里面打印：",b)
+def demo3():
+    c = 999
+    print(b) --->b的作用域只能在demo2,
+def demo4():
+    global aa  ---> global 声明全局变量
+    aa = 100
+demo4()
+print(aa)
+
+例子5:
+num  = 100 
+def demo5():
+    num = 200     
+    print("函数中打印num:",num)   --->就近原则  200
+print("函数外打印num:",num) --->输出全局变量  100
+
+三.内置函数的使用
+1.len() :获取数据的长度
+str = 'adddfdf'
+print(len(str))
+2.sum() :求和
+li = [11,22,33,44]
+dic = {'a':11,'b':22}
+res = sum(li)+ sum(dic.values())
+print(res)
+3.max(): 最大值
+res1 = max(li)
+print(res1)
+4.min(): 最小值
+res2 = min(li)
+print(res2)
+5. int():字符串转换成整
+   str():转换成字符串
+   bool():获取数据的布尔值，python中所有的数据都有布尔值，非零为True,（数据值等于0，数据为空，或者数据长度为0，为False）
+   a = [] () {}
+   print(bool(a)) --->false
+   float():
+   list(): 转换成列表
+   tuple():转换成元组
+   dict():转换成字典
+   set():转换成集合
+   range()：生成一个整数序列
+   
+6.高级的内置函数：
+a. enumerate: 同时获得序列数据下标及它的值
+#打印列表中每个元素以及下标
+li = ['aa','bb','cc','dd']
+res = enumerate(li)
+for i,v in enumerate(li):
+    print(f:"下标{i},值{v}")
+b.eval:可以识别字符串中的有效pyhton表达式
+去掉字符串两边的引号
+a = " [11,22,33,44]"
+b = " {'a':11,'b':22}"
+c = "77>99"
+d = "print('hello,python')"
+
+res = eval(a)
+print(type(res))
+res2 = eval(b)
+print(type(res2))
+res3 = eval(c)
+print(res3)
+res4 = eval(d)
+print(res4)
+
+c.filter :过滤器函数
+dic = {'aa':11,'bb':22,'cc':33,'dd':44}
+#获取字典中值大于30的键值对，然后放在新的字典中
+#方式一：
+new_dic = {}
+for i，v in dic.items():
+    if v >30:
+        new_dic[k] = v
+print(new_dic)
+#方式二： filter(过滤函数,dic.items())
+def func(x):
+    return x[1]>30
+res = filter(func,dic.items())
+print(dict(list(res)))
+
+li =[11,22,33,44,55,66]
+def fun(x):
+    return 60 > x > 30
+res = filter(fun,li)
+print(list(res))
+-----------扩展知识------------------------------
+#匿名函数：lamda表达式（适用于函数中只有一行代码的简单函数）
+lamda 参数：返回值
+res2 = filter(lamda x: 60>x>30,li)
+print(list(res))
+d. zip()聚合打包  ---以最短的数据为准，
+user_title = ['name','age','sex','tel',addres']
+user_info = [['cathy',18,'女‘],['Eason‘，30，’男‘],['lily',25,'女‘]]
+将上述数据转换为以下格式：
+users = [{'name':'cathy','age':18,'sex':'女‘}，
+        {'name':'Eason','age':30,'sex':'男‘}，
+        {'name':'lily','age':25,'sex':'女‘}]
+
+list1 = []
+for item in user_info:
+    dic = dict(zip(users_title,item))
+    list1.append(dic)
+print(list1)
