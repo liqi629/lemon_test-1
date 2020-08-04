@@ -1,0 +1,128 @@
+一.读取文件
+1.语法：open ("文件名“，打开文件的格式，endcoding = 'utf-8")
+注意点： 被打开的文件和当前文件在同一路径下，可以直接写文件名，不在同一路径下，写文件完整的路径
+三种读取方法：
+read():读取文件中所有的内容
+readline():按行读取，每次读取一行的内容
+readlines():按行读取，按行把所有的内容读取到列表中,每一行就是列表中的每个元素
+例子1:
+f = open('test.txt','r',encoding = 'utf-8')
+#读取文件的所有的内容
+content = f.read()
+contents = f.readlines()
+c7 = f.readlines()[6]
+print(c7)
+print(content)
+#一定要关闭文件
+f.close()
+2. 打开文件的模式
+r: 只读模式（read)，如果文件不存在，则会报错（提示文件找不到）
+w: 写入模式(write)(覆盖写入，把文件原有的内容清除，如果文件不存在，则会自动创建）
+a: 写入模式（append),（追加写入，在文件原来的内容尾部写入新的内容，文件不存在，则会自动创建）
+#通常用来操作非文本格式的文件（比如图片）
+rb:只读模式，以二进制的模式打开，
+wb:写入模式，以二进制的模式写入，
+ab: 写入模式，以二进制的模式写入，
+二. 文件写入
+例子2:图片的复制
+# 打开文件
+f1 = open('a.gif','rb')
+f2 = open('copy.gif','wb')
+# 读取文件，写入文件
+content = f1.read()
+f2.write(content)
+f1.close()
+f2.close()
+三. 上下文管理器 with 
+通过with打开文件，操作完不需要关闭文件
+例子3:
+with open('a.gif','rb') as f:
+    content = f.read()
+with open('copy.gif','wb') as f2: 
+    f2.write(content)
+
+四.模块和包
+1.定义
+模块：在python中只要是.py结尾的文件都可以称之为模块
+包：包含__init__.py的文件的文件夹就可以称之为一个python包
+
+2.模块和包的导入
+#方式一:导入包
+import package
+#方式二: 导入一个或者多个模块,并为模块起别名
+import module1 as module1_cathy,module2 as module2_cathy
+#方式三: 导入包中的模块
+from package import module
+from 包名（如果存在多级嵌套的情况） import 模块名
+需要一级一级的往下走
+#方式四：导入模块中的某个函数或者变量
+from 模块名 import 函数名/变量
+from 包名.模块名 import 变量名/函数
+#相对于项目路径，一级一级往下导入 
+from 包名 import 模块名
+from XXX import XXX  as 别名
+
+
+常规导入：import sys
+这种导入方式的好处是可以一次行的导入多个包或者模块
+import os,sys,time
+使用from语句导入
+from functools import func
+还可以使用from方法导入模块的全部内容
+from os import *
+假设有这么个包结构：
+package/
+	__init__.py
+	subpackage1/
+		__init__.py
+		moduleX.py
+		moduleY.py
+	subpackage2/
+		__init__.py
+		moduleZ.py
+	moduleA.py
+
+绝对导入：就是带绝对路径（包内逻辑层次）的导入：
+import moduleA.functionA
+或者
+from moduleX import functionX
+相对导入，就是相对于当前文件位置的导入（.代表当前模块层次，..代表上层，...代表上上层）
+例如： 在moduleY.py 导入moduleX.py中的functionX:
+from .moduleX import functionX
+例如：在moduleY.py中导入moduleA
+import ..moduleA
+__init__.py 有什么作用：python 包的标识
+用于组织包（package），方便管理各个模块之间的引用，控制着包的导入行为，该文件可以什么内容都不需要写，即为空文件，
+
+下面的这个条件，只有在直接运行该文件的时候才会成立（该文件作为启动文件）
+if __name__ == '__main__'
+__name__:它是python中的一个魔法变量，（值不是固定的）
+当文件作为程序的入口文件（作为启动文件），它的值为__main__
+其他情况，该模块作为被其他模块导入的时候，它的值作为模块名
+如何理解相对导入和绝对导入，
+首先，记住或者理解下面四点：
+1.python中包导入搜索路径
+1) 在当前目录下搜索
+2）在环境变量PYTHONPATH中指定的路径列表中依次搜索
+3）在python安装路径中的lib库中搜索
+2. Python完成import的步骤，Pyhton所有加载的模块信息都放在sys.modules结构中，当加载一个模块时：
+1）import A,先在sys.modules中搜索是否存在A，存在则不加载，不存在则先为A创建module，并加载
+2）from A import B,先为A创建modules对象，再解析A，从中寻找B，并填充到A的__dict__中
+3.有且只有一个top_level script,这个top_level script就是最开始运行的那个脚本
+4.脚本文件在实际文件系统目录结构中的位置，和python解释器认为它所在的位置不是一回事，
+Python解释器利用脚本文件（或者称为模块）的__name__属性来判定它所属的包
+
+
+Python解释器进行相对或绝对调用过程：
+1. 直接运行（top_level脚本）
+python myfile.py
+2. 作为模块运行
+python -m myfile.py
+或者从其他脚本文件中
+import myfile.py
+
+以上两种方式，无论哪一种，在文件被调用时，Python解释器都会给它起个名字并存储在文件的__name__属性中，top_level文件被命名为__main__,模块方式运行的文件
+被命名为“以所在包/子包作为前缀，并以.作为分隔符，再加上文件自身“
+from package.subpackage1.moduleX import functionX
+
+python -m package.subpackage1.moduleX
